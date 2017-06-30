@@ -6,6 +6,7 @@ Created on Tue Jun 27 22:19:47 2017
 """
 
 import pandas as pd
+import numpy as np
 
 # importing and seperating the target
 dataset = pd.read_csv('50_Startups.csv')
@@ -34,3 +35,23 @@ regressor.fit(x_train, y_train)
 
 # predict
 y_pred = regressor.predict(x_test)
+
+# backward elimination
+import statsmodels.formula.api as sm
+x = np.append(arr = np.ones((50, 1)).astype(int), values = x, axis = 1)
+
+x_opt = x[:, [0, 1, 2, 3, 4, 5]]
+regressor_OLS = sm.OLS(endog = y, exog = x_opt).fit()
+regressor_OLS.summary()
+
+x_opt = x[:, [0, 1, 3, 4, 5]]
+regressor_OLS = sm.OLS(endog = y, exog = x_opt).fit()
+regressor_OLS.summary()
+
+x_opt = x[:, [0, 3, 4, 5]]
+regressor_OLS = sm.OLS(endog = y, exog = x_opt).fit()
+regressor_OLS.summary()
+
+x_opt = x[:, [0, 3, 5]]
+regressor_OLS = sm.OLS(endog = y, exog = x_opt).fit()
+regressor_OLS.summary()
