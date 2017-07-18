@@ -21,7 +21,7 @@ x_test = sc_x.transform(x_test)
 
 # model
 from sklearn.svm import SVC
-classifier = SVC(kernel = 'linear', random_state = 42)
+classifier = SVC(kernel = 'rbf', random_state = 42)
 classifier.fit(x_train, y_train)
 
 # predict
